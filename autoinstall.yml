@@ -113,7 +113,13 @@ autoinstall:
     updates: all
     shutdown: reboot
     late-commands:
-        - apt update; sudo apt upgrade -y;     
+        - sudo apt clean;
+        - sudo apt autoclean;
+        - sudo apt update --fix-missing;
+        - sudo dpkg --add-architecture i386;
+        - sudo apt update; sudo apt upgrade -y;
+        - sudo apt install libc6:i386 -y;
+        
         - if command -v google-chrome >/dev/null 2>&1; then echo 'google-chrome existe'; else
             wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb;
             dpkg -i *.deb;
@@ -148,7 +154,7 @@ autoinstall:
         - echo "alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt-get clean && sudo apt-get autoclean && sudo killall snap-store; sudo snap refresh && flatpak update -y;'" >> /home/$USER/.bashrc
         - echo "alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt-get clean && sudo apt-get autoclean && sudo killall snap-store; sudo snap refresh && flatpak update -y;'" >> /home/$USER/.zshrc
         - source ~/.zshrc
-    # storage:
+   # storage:
     #     layout:
     #         name: custom
     #     devices:
