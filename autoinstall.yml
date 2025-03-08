@@ -24,35 +24,4 @@ autoinstall:
         install: true
     updates: all
     shutdown: reboot
-   
-    # storage:
-    #     layout:
-    #         name: custom
-    #     devices:
-    #         nvme0n1:
-    #             type: disk
-    #             id: 09F3A000000000000195
-    #             ptable: gpt
-    #             wipe: superblock-recursive
-    #             grub_device: true
-    #             partitions:
-    #                 - name: root
-    #                   size: 50%
-    #                   flag: boot
-    #                   fs: ext4
-    #                   mountpoint: /
-    #                 - name: home
-    #                   size: 50%
-    #                   fs: ext4
-    #                   mountpoint: /home
-    # network:
-    #     version: 2
-    #     ethernets:
-    #         eth0:
-    #             dhcp4: true
-    #     wifis:
-    #         wlan0:
-    #             dhcp4: true
-    #             access-points:
-    #                 "jt_g5":
-    #                     password: "$6$LsC2zGgTzq39PTmV$h1f63kzAXuwGOI8sihhW3m05enuCH2/UDFOGRHpcBQaGGl4QaL8IBLJIqwvhbpp9/RLvwbW9wUGDbrcpKLfDg1"
+  
