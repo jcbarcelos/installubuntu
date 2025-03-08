@@ -113,12 +113,12 @@ autoinstall:
     updates: all
     shutdown: reboot
     late-commands:
-        - sudo apt clean
-        - sudo apt autoclean
-        - sudo apt update --fix-missing
-        - sudo dpkg --add-architecture i386
-        - sudo apt update; sudo apt upgrade -y
-        - sudo apt install libc6:i386 -y
+        - apt clean
+        - apt autoclean
+        - apt update --fix-missing
+        - dpkg --add-architecture i386
+        - apt update; apt upgrade -y
+        - apt install libc6:i386 -y
         - systemctl start docker.service
         - systemctl enable docker.service
         - chown $USER:$USER /var/run/docker.sock
