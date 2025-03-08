@@ -113,40 +113,12 @@ autoinstall:
     updates: all
     shutdown: reboot
     late-commands:
-        - sudo apt clean;
-        - sudo apt autoclean;
-        - sudo apt update --fix-missing;
-        - sudo dpkg --add-architecture i386;
-        - sudo apt update; sudo apt upgrade -y;
-        - sudo apt install libc6:i386 -y;
-        
-        - if command -v google-chrome >/dev/null 2>&1; then echo 'google-chrome existe'; else
-            wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb;
-            dpkg -i *.deb;
-            rm -rf *.deb;
-          fi
-       # - flatpak install flathub --assumeyes com.github.unrud.VideoDownloader
-        - git clone https://github.com/asdf-vm/asdf.git /home/$USER/.asdf --branch v0.14.0
-        - echo ". /home/$USER/.asdf/asdf.sh" >> /home/$USER/.zshrc
-        - echo ". /home/$USER/.asdf/completions/asdf.bash" >> /home/$USER/.zshrc
-        - source /home/$USER/.zshrc
-        - asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-        - asdf plugin-add java https://github.com/halcyon/asdf-java.git
-        - asdf plugin-add flutter https://github.com/oae/asdf-flutter.git
-        - asdf plugin-add python
-        - npm config set prefix ~/.npm-global
-        - npm config set cache ~/.npm-global/cache
-        - asdf install nodejs latest
-        - asdf global nodejs latest
-        - asdf install java openjdk-11
-        - asdf install java latest
-        - asdf global java openjdk-11
-        - asdf install flutter latest
-        - asdf global flutter latest
-        - asdf install python latest
-        - asdf install python 3.6.12
-        - npm install -g yarn
-        - npm install -g pnpm
+        - sudo apt clean
+        - sudo apt autoclean
+        - sudo apt update --fix-missing
+        - sudo dpkg --add-architecture i386
+        - sudo apt update; sudo apt upgrade -y
+        - sudo apt install libc6:i386 -y
         - systemctl start docker.service
         - systemctl enable docker.service
         - chown $USER:$USER /var/run/docker.sock
