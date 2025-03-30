@@ -89,8 +89,6 @@ autoinstall:
             name: manual
 
     late-commands:
-      - echo "Executando pós-instalação" >> /target/root/late-commands.log
-      - set -x
       - curtin in-target -- apt-get update
       - curtin in-target apt update && apt install -y gnome-software-plugin-flatpak
       - curtin in-target sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
