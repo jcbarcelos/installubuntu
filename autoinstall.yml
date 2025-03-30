@@ -27,6 +27,8 @@ autoinstall:
         - gpg
         - curl
         - gh
+        - ca-certificates
+        - gnupg
 
     snaps:
         - name: gnome-font-viewer
@@ -104,6 +106,10 @@ autoinstall:
         - asdf install python 3.6.12
         - systemctl start docker.service
         - chown $USER:$USER /var/run/docker.sock
+        - usermod -aG docker $USER
+        - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb;
+        - dpkg -i *.deb;
+        - rm -rf *.deb;
 
 
     network:
