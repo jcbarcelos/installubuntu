@@ -89,8 +89,6 @@ autoinstall:
             name: manual
 
     late-commands:
-      - echo "Executando pós-instalação" >> /target/root/late-commands.log
-      - set -x
       - curtin in-target -- apt-get update
       - curtin in-target apt update && apt install -y gnome-software-plugin-flatpak
       - curtin in-target sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
@@ -117,14 +115,4 @@ autoinstall:
       - curtin in-target echo "alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt-get clean && sudo apt-get autoclean && sudo killall snap-store; sudo snap refresh && flatpak update -y;'" >> /home/$USER/.bashrc
       - curtin in-target echo "alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt-get clean && sudo apt-get autoclean && sudo killall snap-store; sudo snap refresh && flatpak update -y;'" >> /home/$USER/.zshrc
 
-    network:
-        version: 2
-        ethernets:
-            eth0:
-                dhcp4: true
-        wifis:
-            wlan0:
-                dhcp4: true
-                access-points:
-                    "jt_g5":
-                        password: "$6$LsC2zGgTzq39PTmV$h1f63kzAXuwGOI8sihhW3m05enuCH2/UDFOGRHpcBQaGGl4QaL8IBLJIqwvhbpp9/RLvwbW9wUGDbrcpKLfDg1"
+
