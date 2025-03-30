@@ -84,9 +84,9 @@ autoinstall:
     #   update: true
     #   channel: latest/edge
     shutdown: reboot
-    # storage:
-    #     layout:
-    #         name: manual
+    storage:
+        layout:
+            name: manual
 
     late-commands:
       - curtin in-target -- apt-get update
