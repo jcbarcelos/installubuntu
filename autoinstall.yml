@@ -90,13 +90,13 @@ autoinstall:
       - set -x
       - curtin in-target -- sh -c "apt update && apt install -y gnome-software-plugin-flatpak"
       - curtin in-target -- sh -c "sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-      - curtin in-target -- sh -c "mkdir -p "${ASDF_DATA_DIR:-$HOME/.asdf}/completions""
+      - curtin in-target -- sh -c "mkdir -p "${ASDF_DATA_DIR:-$HOME/.asdf}/completions"
       - curtin in-target -- sh -c "asdf completion zsh > "${ASDF_DATA_DIR:-$HOME/.asdf}/completions/_asdf"
       - curtin in-target -- sh -c "git clone https://github.com/asdf-vm/asdf.git --branch v0.16.0"
       - curtin in-target -- sh -c "export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
       - curtin in-target -- sh -c "chsh -s $(which zsh)"
-      - curtin in-target -- sh -c "echo "alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt-get clean && sudo apt-get autoclean && sudo killall snap-store; sudo snap refresh && flatpak update -y;'" >> /home/$USER/.bashrc"
-      - curtin in-target -- sh -c "echo "alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt-get clean && sudo apt-get autoclean && sudo killall snap-store; sudo snap refresh && flatpak update -y;'" >> /home/$USER/.zshrc"
+      - curtin in-target -- sh -c "echo "alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt-get clean && sudo apt-get autoclean && sudo killall snap-store; sudo snap refresh && flatpak update -y;' >> /home/$USER/.bashrc"
+      - curtin in-target -- sh -c "echo "alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt-get clean && sudo apt-get autoclean && sudo killall snap-store; sudo snap refresh && flatpak update -y;' >> /home/$USER/.zshrc"
       - curtin in-target -- sh -c "source ~/.zshrc"
       - curtin in-target -- sh -c "asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git"
 
