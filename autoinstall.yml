@@ -10,7 +10,6 @@ autoinstall:
         layout: br
     timezone: "America/Sao_Paulo"
     packages:
-        - libreoffice
         - gimp
         - git
         - wget
@@ -24,14 +23,12 @@ autoinstall:
         - ninja-build
         - ubuntu-restricted-extras
         - ffmpeg
-        - python3-pip
         - cmake
-        - python3-dev
         - jq
         - gpg
         - curl
         - gh
-        
+
     snaps:
         - name: spotify
           channel: stable
@@ -84,27 +81,27 @@ autoinstall:
         install: true
     updates: all
     shutdown: reboot
-   
-   # storage:
-    #     layout:
-    #         name: custom
-    #     devices:
-    #         nvme0n1:
-    #             type: disk
-    #             id: 09F3A000000000000195
-    #             ptable: gpt
-    #             wipe: superblock-recursive
-    #             grub_device: true
-    #             partitions:
-    #                 - name: root
-    #                   size: 50%
-    #                   flag: boot
-    #                   fs: ext4
-    #                   mountpoint: /
-    #                 - name: home
-    #                   size: 50%
-    #                   fs: ext4
-    #                   mountpoint: /home
+
+# storage:
+#         layout:
+#             name: custom
+#         devices:
+#             nvme0n1:
+#                 type: disk
+#                 id: 09F3A000000000000195
+#                 ptable: gpt
+#                 wipe: superblock-recursive
+#                 grub_device: true
+#                 partitions:
+#                     - name: root
+#                       size: 100%
+#                       flag: boot
+#                       fs: ext4
+#                       mountpoint: /
+#                     - name: home
+#                       size: 50%
+#                       fs: ext4
+#                       mountpoint: /home
     # network:
     #     version: 2
     #     ethernets:
