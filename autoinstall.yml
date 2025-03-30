@@ -49,9 +49,6 @@ autoinstall:
         - name: audacity
           channel: stable
           classic: false
-        - name: brave
-          channel: stable
-          classic: false
         - name: discord
           channel: stable
           classic: false
@@ -73,6 +70,9 @@ autoinstall:
         - name: android-studio
           channel: stable
           classic: true
+        - name: brave
+          channel: stable
+          classic: false
     codecs:
         install: true
     drivers:
