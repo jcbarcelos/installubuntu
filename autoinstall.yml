@@ -4,7 +4,7 @@ autoinstall:
         realname: 'Júlio César'
         hostname: ubuntu-desktop
         username: jc
-        password: '$6$.7PR4Fjwsf4VPGhG$s6CkDqR/l/YS3TM4zwSUqEYxzMgoYVjsJ27l/d/Ak7CJFvdUUZ7HcbkZvVUlv5VFfvYKDqaKjm4lxxwJyYdeM0'
+        password: '$6$.7PR4Fjwsf4VPGhG$O5PjMjRrLs8bLR6OjS5.KLo6j/kt5/2Ac6Jv1hOUtbAz.JNIE/2yCdfhZJkK82ZG.7tvYlNBDbrUdFjZyCUEz/'
     locale: en_US.UTF-8
     keyboard:
         layout: br
@@ -21,7 +21,6 @@ autoinstall:
         - curl
         - clang
         - ninja-build
-        - ubuntu-restricted-extras
         - ffmpeg
         - cmake
         - jq
@@ -30,9 +29,6 @@ autoinstall:
         - gh
 
     snaps:
-        - name: spotify
-          channel: stable
-          classic: false
         - name: gnome-font-viewer
           channel: stable
           classic: false
@@ -81,35 +77,43 @@ autoinstall:
         install: true
     updates: all
     shutdown: reboot
+    storage:
+        layout:
+            name: manual
+    late-commands:
+        - apt-get install dirmngr gpg curl gawk -y
+        - sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+        - mkdir -p "${ASDF_DATA_DIR:-$HOME/.asdf}/completions"
+        - asdf completion zsh > "${ASDF_DATA_DIR:-$HOME/.asdf}/completions/_asdf"
+        - git clone https://github.com/asdf-vm/asdf.git --branch v0.16.0
+        - export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+        - chsh -s $(which zsh)
+        - echo "alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt-get clean && sudo apt-get autoclean && sudo killall snap-store; sudo snap refresh && flatpak update -y;'" >> /home/$USER/.bashrc
+        - echo "alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt-get clean && sudo apt-get autoclean && sudo killall snap-store; sudo snap refresh && flatpak update -y;'" >> /home/$USER/.zshrc
+        - source ~/.zshrc
+        - asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+        - asdf install nodejs latest
+        - asdf plugin add
+        -	asdf install java openjdk-11
+        - asdf install java latest
+        - asdf global java openjdk-11
+        - asdf install flutter latest
+        - asdf install flutter latest
+        - asdf global flutter latest
+        - asdf install pyhton latest
+        - asdf install python 3.6.12
+        - systemctl start docker.service
+        - chown $USER:$USER /var/run/docker.sock
 
-# storage:
-#         layout:
-#             name: custom
-#         devices:
-#             nvme0n1:
-#                 type: disk
-#                 id: 09F3A000000000000195
-#                 ptable: gpt
-#                 wipe: superblock-recursive
-#                 grub_device: true
-#                 partitions:
-#                     - name: root
-#                       size: 100%
-#                       flag: boot
-#                       fs: ext4
-#                       mountpoint: /
-#                     - name: home
-#                       size: 50%
-#                       fs: ext4
-#                       mountpoint: /home
-    # network:
-    #     version: 2
-    #     ethernets:
-    #         eth0:
-    #             dhcp4: true
-    #     wifis:
-    #         wlan0:
-    #             dhcp4: true
-    #             access-points:
-    #                 "jt_g5":
-    #                     password: "$6$LsC2zGgTzq39PTmV$h1f63kzAXuwGOI8sihhW3m05enuCH2/UDFOGRHpcBQaGGl4QaL8IBLJIqwvhbpp9/RLvwbW9wUGDbrcpKLfDg1"
+
+    network:
+        version: 2
+        ethernets:
+            eth0:
+                dhcp4: true
+        wifis:
+            wlan0:
+                dhcp4: true
+                access-points:
+                    "jt_g5":
+                        password: "$6$LsC2zGgTzq39PTmV$h1f63kzAXuwGOI8sihhW3m05enuCH2/UDFOGRHpcBQaGGl4QaL8IBLJIqwvhbpp9/RLvwbW9wUGDbrcpKLfDg1"
