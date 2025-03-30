@@ -89,32 +89,33 @@ autoinstall:
             name: manual
 
     late-commands:
-        - echo "Executando pós-instalação" >> /target/root/late-commands.log
-        - set -x
-        - curtin in-target -- sh -c "apt update && apt install -y gnome-software-plugin-flatpak"
-        - curtin in-target -- sh -c "sh -c '$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)'"
-        - curtin in-target -- sh -c "mkdir -p '${ASDF_DATA_DIR:-$HOME/.asdf}/completions'"
-        - curtin in-target -- sh -c "git clone https://github.com/asdf-vm/asdf.git --branch v0.16.0 ${ASDF_DATA_DIR:-$HOME/.asdf}"
-        - curtin in-target -- sh -c "echo '. ${ASDF_DATA_DIR:-$HOME/.asdf}/asdf.sh' >> ~/.bashrc"
-        - curtin in-target -- sh -c "echo '. ${ASDF_DATA_DIR:-$HOME/.asdf}/asdf.sh' >> ~/.zshrc"
-        - curtin in-target -- sh -c "source ~/.zshrc"
-        - curtin in-target -- sh -c "asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git"
-        - curtin in-target -- sh -c "wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/chrome.deb"
-        - curtin in-target -- sh -c "dpkg -i /tmp/chrome.deb || apt-get -f install -y"
-        - curtin in-target -- sh -c "rm -rf /tmp/chrome.deb"
-        - curtin in-target -- sh -c "asdf install nodejs latest"
-        - curtin in-target -- sh -c "asdf install java openjdk-11"
-        - curtin in-target -- sh -c "asdf install java latest"
-        - curtin in-target -- sh -c "asdf global java openjdk-11"
-        - curtin in-target -- sh -c "asdf install flutter latest"
-        - curtin in-target -- sh -c "asdf global flutter latest"
-        - curtin in-target -- sh -c "asdf install python latest"
-        - curtin in-target -- sh -c "asdf install python 3.6.12"
-        - curtin in-target -- sh -c "systemctl start docker.service"
-        - curtin in-target -- sh -c "chown $USER:$USER /var/run/docker.sock"
-        - curtin in-target -- sh -c "usermod -aG docker $USER"
-        - curtin in-target -- sh -c "echo 'alias update="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt-get clean && sudo apt-get autoclean && sudo killall snap-store; sudo snap refresh && flatpak update -y;"' >> /home/$USER/.bashrc"
-        - curtin in-target -- sh -c "echo 'alias update="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt-get clean && sudo apt-get autoclean && sudo killall snap-store; sudo snap refresh && flatpak update -y;"' >> /home/$USER/.zshrc"
+      - echo "Executando pós-instalação" >> /target/root/late-commands.log
+      - set -x
+      - curtin in-target -- apt-get update
+      - curtin in-target apt update && apt install -y gnome-software-plugin-flatpak
+      - curtin in-target sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+      - curtin in-target mkdir -p "${ASDF_DATA_DIR:-$HOME/.asdf}/completions"
+      - curtin in-target git clone https://github.com/asdf-vm/asdf.git --branch v0.16.0 ${ASDF_DATA_DIR:-$HOME/.asdf}
+      - curtin in-target echo ". ${ASDF_DATA_DIR:-$HOME/.asdf}/asdf.sh" >> ~/.bashrc
+      - curtin in-target echo ". ${ASDF_DATA_DIR:-$HOME/.asdf}/asdf.sh" >> ~/.zshrc
+      - curtin in-target source ~/.zshrc
+      - curtin in-target asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+      - curtin in-target wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O /tmp/chrome.deb
+      - curtin in-target dpkg -i /tmp/chrome.deb || apt-get -f install -y
+      - curtin in-target rm -rf /tmp/chrome.deb
+      - curtin in-target asdf install nodejs latest
+      - curtin in-target asdf install java openjdk-11
+      - curtin in-target asdf install java latest
+      - curtin in-target asdf global java openjdk-11
+      - curtin in-target asdf install flutter latest
+      - curtin in-target asdf global flutter latest
+      - curtin in-target asdf install python latest
+      - curtin in-target asdf install python 3.6.12
+      - curtin in-target systemctl start docker.service
+      - curtin in-target chown $USER:$USER /var/run/docker.sock
+      - curtin in-target usermod -aG docker $USER
+      - curtin in-target echo "alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt-get clean && sudo apt-get autoclean && sudo killall snap-store; sudo snap refresh && flatpak update -y;'" >> /home/$USER/.bashrc
+      - curtin in-target echo "alias update='sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y && sudo apt-get clean && sudo apt-get autoclean && sudo killall snap-store; sudo snap refresh && flatpak update -y;'" >> /home/$USER/.zshrc
 
     network:
         version: 2
